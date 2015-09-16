@@ -17,4 +17,9 @@
         android:layout_height="100dp"
         android:text="Sensors"
         android:id="@+id/sensors" />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Light saber"
+        android:id="@+id/lightSaber" />
 </LinearLayout>

@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
         compass.setOnClickListener(clickOnCompassButton);
         Button sensors = (Button) findViewById(R.id.sensors);
         sensors.setOnClickListener(clickOnSensorsButton);
+        Button lightsaber = (Button) findViewById(R.id.lightSaber);
+        lightsaber.setOnClickListener(clickOnLightSaberButton);
     }
 
     @Override
@@ -54,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent sensorsIntent = new Intent(MainActivity.this, SensorsActivity.class);
             startActivity(sensorsIntent);
+        }
+    };
+    View.OnClickListener clickOnLightSaberButton = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent lightSaberIntent = new Intent(MainActivity.this, LightSaberActivity.class);
+            startActivity(lightSaberIntent);
         }
     };
 }

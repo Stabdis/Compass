@@ -43,7 +43,7 @@ public class Compass extends ActionBarActivity implements SensorEventListener {
 
     @Override
     protected void onPause() {
-        super.onResume();
+        super.onPause();
         sensorManager.unregisterListener(this, accelerometer);
         sensorManager.unregisterListener(this, magnometer);
     }
