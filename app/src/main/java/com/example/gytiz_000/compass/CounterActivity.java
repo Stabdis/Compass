@@ -1,16 +1,32 @@
 package com.example.gytiz_000.compass;
 
-import android.support.v7.app.AppCompatActivity;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
-public class CounterActivity extends AppCompatActivity {
+public class CounterActivity extends AppCompatActivity implements SensorEventListener {
+
+    private SensorManager sensormanager;
+    private Sensor accelerometer;
+    private float currentAngle = 0;
+    private float[] readingAccelerometer = new float[3];
+    private TextView text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_counter);
+
+        sensormanager   = (SensorManager) getSystemService(SENSOR_SERVICE);
+        accelerometer   = sensormanager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        text            = (TextView) findViewById(R.id.accelerometerY);
     }
 
     @Override
@@ -33,5 +49,39 @@ public class CounterActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            float y = event.values[1];
+            text.setText("AXIS-Y: " + y);
+
+            if (getRandom(10, 0) > y+0.6)
+                Log.d("ark", "tick: " + y);
+
+        }
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensormanager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensormanager.unregisterListener(this, accelerometer);
+    }
+
+    private double getRandom(int min, int max) {
+        return Math.random() * (max - min) + min;
     }
 }
