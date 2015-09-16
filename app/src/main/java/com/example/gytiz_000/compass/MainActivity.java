@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         compass.setOnClickListener(clickOnCompassButton);
         Button sensors = (Button) findViewById(R.id.sensors);
         sensors.setOnClickListener(clickOnSensorsButton);
-        Button lightsaber = (Button) findViewById(R.id.lightSaber);
-        lightsaber.setOnClickListener(clickOnLightSaberButton);
+        Button lightSaber = (Button) findViewById(R.id.lightSaber);
+        lightSaber.setOnClickListener(clickOnLightSaberButton);
     }
 
     @Override

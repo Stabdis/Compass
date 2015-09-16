@@ -23,6 +23,9 @@
         <activity
             android:name=".SensorsActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".LightSaberActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
