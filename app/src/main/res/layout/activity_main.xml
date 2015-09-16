@@ -10,16 +10,23 @@
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:text="Compass"
-        android:id="@+id/compass"
-/>
+        android:id="@+id/compass" />
+
     <Button
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:text="Sensors"
         android:id="@+id/sensors" />
+
     <Button
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:text="Light saber"
         android:id="@+id/lightSaber" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:text="Geiger-Müller Counter"
+        android:id="@+id/counter" />
 </LinearLayout>
