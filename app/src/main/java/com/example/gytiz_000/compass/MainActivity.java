@@ -1,9 +1,8 @@
 package com.example.gytiz_000.compass;
 
 import android.content.Intent;
-import android.hardware.Sensor;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         sensors.setOnClickListener(clickOnSensorsButton);
         Button lightSaber = (Button) findViewById(R.id.lightSaber);
         lightSaber.setOnClickListener(clickOnLightSaberButton);
+        Button counter = (Button) findViewById(R.id.counter);
+        counter.setOnClickListener(clickOnCounterButton);
     }
 
     @Override
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     View.OnClickListener clickOnCompassButton = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -63,6 +65,13 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent lightSaberIntent = new Intent(MainActivity.this, LightSaberActivity.class);
             startActivity(lightSaberIntent);
+        }
+    };
+    View.OnClickListener clickOnCounterButton = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent counterIntent = new Intent(MainActivity.this, CounterActivity.class);
+            startActivity(counterIntent);
         }
     };
 }
