@@ -27,11 +27,9 @@ public class LightSaberActivity extends ActionBarActivity implements SensorEvent
     private float mAccel;   // acceleration apart from gravity
     private float mAccelCurrent;    // current acceleration including gravity
     private float mAccelLast;   // last acceleration including gravity
-    private int lightSaberOnSound;
-    private int lightSaberHitSound;
-    private int idLightSaberOnSound = 1;
-    private int idLightSaberHitSound = 2;
-    private boolean check = true;
+    private int saberSwingSound;
+    private int idSaberSwingSound = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +54,10 @@ public class LightSaberActivity extends ActionBarActivity implements SensorEvent
             @Override
             public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
                 if (status == 0) {
-                    if(sampleId == idLightSaberOnSound)
-                        soundPool.play(lightSaberOnSound, 0.2f, 0.2f, 1, -1, 1f);
-                    if(sampleId == idLightSaberHitSound)
-                        soundPool.play(lightSaberHitSound, 0.2f, 0.2f, 1, -1, 1f);
+                    if (sampleId == idSaberSwingSound)
+                        soundPool.play(saberSwingSound, 0.2f, 0.2f, 1, -1, 1f);
+                    if (sampleId == idSaberSwingSound)
+                        soundPool.play(saberSwingSound, 0.2f, 0.2f, 1, -1, 1f);
                 } else {
                     Toast.makeText(LightSaberActivity.this, "Error loading sound: " + sampleId, Toast.LENGTH_LONG).show();
                 }
@@ -85,8 +83,8 @@ public class LightSaberActivity extends ActionBarActivity implements SensorEvent
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        soundpool.stop(idLightSaberOnSound);
-        soundpool.stop(idLightSaberHitSound);
+        soundpool.stop(idSaberSwingSound);
+        soundpool.stop(idSaberSwingSound);
         soundpool.release();
     }
 
@@ -119,15 +117,8 @@ public class LightSaberActivity extends ActionBarActivity implements SensorEvent
         mAccel = mAccel * 0.9f + delta;
         if (mAccel > 12) {
             Toast.makeText(getApplicationContext(), "Device has shaken.", Toast.LENGTH_LONG).show();
-            if(check) {
-                soundpool.resume(idLightSaberOnSound);
-                lightSaberOnSound = soundpool.load(this, R.raw.saberon, 1);
-                check = false;
-            }
-            else{
-                soundpool.pause(idLightSaberOnSound);
-                check = true;
-            }
+            soundpool.resume(idSaberSwingSound);
+            saberSwingSound = soundpool.load(this, R.raw.saberswing, 1);
         }
     }
 
