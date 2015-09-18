@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +45,14 @@ public class CounterActivity extends AppCompatActivity implements SensorEventLis
         accelerometer   = sensormanager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         text            = (TextView) findViewById(R.id.accelerometerY);
 
+        Button back = (Button) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Close activity
+                finish();
+            }
+        });
 
     }
 

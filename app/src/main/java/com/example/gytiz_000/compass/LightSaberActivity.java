@@ -12,6 +12,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +22,7 @@ import org.w3c.dom.Text;
 /**
  * Created by gytiz_000 on 9/16/2015.
  */
-public class LightSaberActivity extends ActionBarActivity implements SensorEventListener {
+public class LightSaberActivity extends AppCompatActivity implements SensorEventListener {
     private SoundPool soundpool;
     private SensorManager sensorManager;
     private Sensor accelerometer;
@@ -37,6 +39,15 @@ public class LightSaberActivity extends ActionBarActivity implements SensorEvent
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
+        Button back = (Button) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Close activity
+                finish();
+            }
+        });
+
         mAccel = 0.00f;
         mAccelCurrent = SensorManager.GRAVITY_EARTH;
         mAccelLast = SensorManager.GRAVITY_EARTH;
@@ -48,21 +59,7 @@ public class LightSaberActivity extends ActionBarActivity implements SensorEvent
             createOldSoundPool();
             Toast.makeText(this, "Using pre Lollipop", Toast.LENGTH_LONG).show();
         }
-
-        soundpool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-
-            @Override
-            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                if (status == 0) {
-                    if (sampleId == idSaberSwingSound)
-                        soundPool.play(saberSwingSound, 0.2f, 0.2f, 1, -1, 1f);
-                    if (sampleId == idSaberSwingSound)
-                        soundPool.play(saberSwingSound, 0.2f, 0.2f, 1, -1, 1f);
-                } else {
-                    Toast.makeText(LightSaberActivity.this, "Error loading sound: " + sampleId, Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        saberSwingSound = soundpool.load(this, R.raw.saberswing, 1);
 
     }
 
@@ -104,10 +101,6 @@ public class LightSaberActivity extends ActionBarActivity implements SensorEvent
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-//        if (event.sensor == accelerometer) {
-//            TextView text = (TextView) findViewById(R.id.text);
-//            text.setText("" + event.values[2]);
-//        }
         float x = event.values[0];
         float y = event.values[1];
         float z = event.values[2];
@@ -116,9 +109,8 @@ public class LightSaberActivity extends ActionBarActivity implements SensorEvent
         float delta = mAccelCurrent - mAccelLast;
         mAccel = mAccel * 0.9f + delta;
         if (mAccel > 12) {
-            Toast.makeText(getApplicationContext(), "Device has shaken.", Toast.LENGTH_LONG).show();
-            soundpool.resume(idSaberSwingSound);
-            saberSwingSound = soundpool.load(this, R.raw.saberswing, 1);
+            Toast.makeText(LightSaberActivity.this, "Device has shaken.", Toast.LENGTH_SHORT).show();
+            soundpool.play(saberSwingSound, 0.2f, 0.2f, 1, 0, 1f);
         }
     }
 

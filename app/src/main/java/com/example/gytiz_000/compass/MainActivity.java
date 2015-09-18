@@ -16,12 +16,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button compass = (Button) findViewById(R.id.compass);
         compass.setOnClickListener(clickOnCompassButton);
-        Button sensors = (Button) findViewById(R.id.sensors);
-        sensors.setOnClickListener(clickOnSensorsButton);
         Button lightSaber = (Button) findViewById(R.id.lightSaber);
         lightSaber.setOnClickListener(clickOnLightSaberButton);
         Button counter = (Button) findViewById(R.id.counter);
         counter.setOnClickListener(clickOnCounterButton);
+        Button quit = (Button) findViewById(R.id.quit);
+        quit.setOnClickListener(clickOnQuitButton);
     }
 
     @Override
@@ -53,13 +53,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(compassIntent);
         }
     };
-    View.OnClickListener clickOnSensorsButton = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent sensorsIntent = new Intent(MainActivity.this, SensorsActivity.class);
-            startActivity(sensorsIntent);
-        }
-    };
     View.OnClickListener clickOnLightSaberButton = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -72,6 +65,12 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent counterIntent = new Intent(MainActivity.this, CounterActivity.class);
             startActivity(counterIntent);
+        }
+    };
+    View.OnClickListener clickOnQuitButton = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
         }
     };
 }
