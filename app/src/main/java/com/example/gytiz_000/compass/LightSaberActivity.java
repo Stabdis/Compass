@@ -10,14 +10,10 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by gytiz_000 on 9/16/2015.
@@ -108,7 +104,7 @@ public class LightSaberActivity extends AppCompatActivity implements SensorEvent
         mAccelCurrent = (float) Math.sqrt((double) (x * x + y * y + z * z));
         float delta = mAccelCurrent - mAccelLast;
         mAccel = mAccel * 0.9f + delta;
-        if (mAccel > 12) {
+        if (mAccel > 10) {
             Toast.makeText(LightSaberActivity.this, "Device has shaken.", Toast.LENGTH_SHORT).show();
             soundpool.play(saberSwingSound, 0.2f, 0.2f, 1, 0, 1f);
         }

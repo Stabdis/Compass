@@ -90,7 +90,7 @@ public class CounterActivity extends AppCompatActivity implements SensorEventLis
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             float y = event.values[1];
 
-            if (getRandom(10, 0) > y+0.5) {
+            if (getRandom(10, -3) > y+0.5) {
                 soundPool.play(soundTik, 0.3f, 0.3f, 1, 0, 1f);
             }
         }
